@@ -1,101 +1,94 @@
+"use client";
+
+import {
+  Box,
+  Heading,
+  HStack,
+  Text,
+  Button,
+  useMediaQuery,
+  useColorMode,
+} from "@chakra-ui/react";
 import Image from "next/image";
-
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+// img
+import desktopBg from "@/app/img/home-shapes.svg";
+import tableBg from "@/app/img/home-shapes-tablet.svg";
+import mobileBg from "@/app/img/home-shapes-mobile.svg";
+import Link from "next/link";
 export default function Home() {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)");
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="home">
+      <Box position="relative" w="100vw" h="100vh" overflow="hidden">
+        {/* Background Image */}
+        <Box
+          position="absolute"
+          top="0"
+          left={isLargerThan800 ? "-60" : "-100"}
+          w="150%"
+          h="auto"
+          zIndex="-1"
+        >
+          <Image
+            src={
+              isLargerThan800 ? desktopBg : isLargerThan500 ? tableBg : mobileBg
+            }
+            alt="background"
+            objectFit="cover"
+          />
+        </Box>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Content */}
+        <HStack justifyContent="space-between" p={6} w="100%">
+          <Box />
+          <Box
+            position={isLargerThan500 ? "absolute" : "static"}
+            left={"3"}
+            w={"100%"}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <Heading textAlign={"center"} fontSize="40px">
+              Mock
+            </Heading>
+          </Box>
+          <Box display="flex" gap="4">
+            <Button variant="secondary" as={Link} href={"/sign-in"}>Login</Button>
+            <Button  as={Link} href={"/sign-up"}>Sign up</Button>
+            <Button onClick={toggleColorMode}>
+              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            </Button>
+          </Box>
+        </HStack>
+
+        {/* Main Text */}
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          h="100%"
+        >
+          <Heading fontSize="5xl" textAlign="center" mb={4}>
+            Prepare for Your Dream Job
+          </Heading>
+          <Text fontSize="lg" textAlign="center" maxW="600px" mb={8}>
+            Ace your interviews with our AI-powered mock interview platform.
+            Practice with realistic scenarios and get personalized feedback to
+            boost your confidence and land your dream job.
+          </Text>
+          <Button
+            size="lg"
+            colorScheme="blue"
+            borderRadius="full"
+            as={Link}
+            href={"/dashboard"}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            Sign up free
+          </Button>
+        </Box>
+      </Box>
     </div>
   );
 }
