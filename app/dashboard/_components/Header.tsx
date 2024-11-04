@@ -8,36 +8,41 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Heading,
+  Button,
+  useColorMode,
+  Link,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { UserButton } from "@clerk/nextjs";
+import ThemeChangerBtn from "@/app/BodyComponents/ThemeChangerBtn";
 
-interface Props {
-  children: React.ReactNode;
-}
+const Links = [
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Projects", path: "/projects" },
+  { name: "About", path: "/about" },
+  { name: "Upgrade", path: "/upgrade" },
+];
 
-const Links = ["Dashboard", "Projects", "Team"];
-
-const NavLink = (props: Props) => {
-  const { children } = props;
+const NavLink = ({ children, href }: { children: React.ReactNode; href: string }) => {
   return (
-    <Box
-      as="a"
-      px={2}
-      py={1}
-      rounded={"md"}
-      _hover={{
-        textDecoration: "none",
-        bg: useColorModeValue("gray.200", "gray.700"),
-      }}
-      href={"#"}
-    >
-      {children}
-    </Box>
+      <Link
+        px={2}
+        py={1}
+        rounded={"md"}
+        href={href}
+        _hover={{
+          textDecoration: "none",
+          bg: useColorModeValue("gray.200", "gray.700"),
+        }}
+      >
+        {children}
+      </Link>
   );
 };
 
 export default function Header() {
+  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -51,20 +56,28 @@ export default function Header() {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
+
+          <Box>
+            <Heading fontFamily="Playwrite GB S" style={{ fontWeight: 'bold', fontSize: '24px'}}>Mock</Heading>
+          </Box>
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link.name} href={link.path}>{link.name}</NavLink>
               ))}
             </HStack>
           </HStack>
-          <Flex alignItems={"center"}>
-            <UserButton />
+          <Flex alignItems={"center"} gap={4}>
+            <Button>
+              <UserButton />
+            </Button>
+            <Box>
+             <ThemeChangerBtn/>
+            </Box>
           </Flex>
         </Flex>
 
@@ -72,14 +85,12 @@ export default function Header() {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link.name} href={link.path}>{link.name}</NavLink>
               ))}
             </Stack>
           </Box>
         ) : null}
       </Box>
-
-      <Box p={4}>Main Content Here</Box>
     </>
   );
 }

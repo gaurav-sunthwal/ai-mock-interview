@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "./theme-provider";
 
 // Importing custom local fonts with defined CSS variables for easier usage across the app
 const geistSans = localFont({
@@ -34,9 +35,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <ClerkProvider>{children}</ClerkProvider>
-        </Providers>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Providers>
+            <ClerkProvider>{children}</ClerkProvider>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
