@@ -33,9 +33,11 @@ type InterviewData = {
 };
 
 export default function Page({ params }: { params: { interviewId: string } }) {
-  const [interviewData, setInterviewData] = useState<InterviewData | null>(null);
+  const [interviewData, setInterviewData] = useState<InterviewData | null>(
+    null
+  );
   const [webCamEable, setWebCamEable] = useState(false);
-const router = useRouter()
+  const router = useRouter();
   const textColor = useColorModeValue("teal.600", "teal.300");
   // const cardBgColor = useColorModeValue("white", "gray.700");
   const btnBgColor = useColorModeValue("teal.600", "teal.400");
@@ -105,9 +107,7 @@ const router = useRouter()
                     <Heading fontSize={"100px"} color={textColor}>
                       <LuWebcam />
                     </Heading>
-                    <Text fontWeight="bold">
-                      Click to Enable Webcam
-                    </Text>
+                    <Text fontWeight="bold">Click to Enable Webcam</Text>
                   </VStack>
                 </CardBody>
               </Card>
@@ -118,12 +118,7 @@ const router = useRouter()
           <Box maxW={"50%"} borderRadius="lg" p={4}>
             {interviewData ? (
               <>
-                <Card
-                  p={5}
-                  boxShadow={"2xl"}
-                  mb={5}
-                  borderRadius="md"
-                >
+                <Card p={5} boxShadow={"2xl"} mb={5} borderRadius="md">
                   <VStack align={"start"} spacing={4}>
                     <Text fontSize={"20px"} fontWeight={700} color={textColor}>
                       <strong>Job Role/Job Position:</strong>{" "}
@@ -133,11 +128,11 @@ const router = useRouter()
                       <strong>Job Description/Tech Stack:</strong>{" "}
                       {interviewData.jobDesc}
                     </Text>
-                    <Text fontSize={"18px"} >
+                    <Text fontSize={"18px"}>
                       <strong>Years of Experience:</strong>{" "}
                       {interviewData.jobExperience}
                     </Text>
-                    <Text fontSize={"18px"} >
+                    <Text fontSize={"18px"}>
                       <strong>Created By:</strong> {interviewData.createdBy}
                     </Text>
                     <Text fontSize={"18px"}>
@@ -148,7 +143,8 @@ const router = useRouter()
                 </Card>
                 <Card p={5} boxShadow="lg" bg="teal.50" borderRadius="md">
                   <Text fontSize="lg" color="gray.600">
-                    <strong>Instructions:</strong> {`Enable your webcam and
+                    <strong>Instructions:</strong>{" "}
+                    {`Enable your webcam and
                     microphone to begin your AI-generated mock interview. You
                     will be asked 5 questions, which you can answer, and at the
                     end, you'll receive feedback based on your responses.`}
@@ -176,7 +172,7 @@ const router = useRouter()
           boxShadow="xl"
           borderRadius="full"
           _hover={{ bg: "teal.500" }}
-          onClick={()=>router.push(`${interviewData?.mockId}/start`)}
+          onClick={() => router.push(`${interviewData?.mockId}/start`)}
         >
           Start Interview
         </Button>
