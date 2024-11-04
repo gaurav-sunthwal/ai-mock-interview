@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Header from "../../_components/Header";
 import {
   Box,
   Card,
@@ -19,6 +18,7 @@ import { db } from "@/utlis/db";
 import Webcam from "react-webcam";
 import { LuWebcam } from "react-icons/lu";
 import { useRouter } from "next/navigation";
+import Header from "@/app/dashboard/_components/Header";
 
 // Define the type for interview data
 type InterviewData = {
