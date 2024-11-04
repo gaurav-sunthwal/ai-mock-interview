@@ -7,10 +7,8 @@ import {
   Text,
   Button,
   useMediaQuery,
-  useColorMode,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 // import * as st from "@/utlis/schema"
 // img
 import desktopBg from "@/app/img/home-shapes.svg";
@@ -19,7 +17,6 @@ import mobileBg from "@/app/img/home-shapes-mobile.svg";
 import Link from "next/link";
 import ThemeChangerBtn from "./BodyComponents/ThemeChangerBtn";
 export default function Home() {
-  const { colorMode, toggleColorMode } = useColorMode();
   const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)");
   return (
