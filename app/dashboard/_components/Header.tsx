@@ -58,7 +58,7 @@ export default function Header() {
           />
 
           <Box>
-            <Heading fontFamily="Playwrite GB S" style={{ fontWeight: 'bold', fontSize: '24px'}}>Mock</Heading>
+            <Heading fontFamily="Playwrite GB S" style={{ fontWeight: 'bold', fontSize: '24px'}}>MockMate</Heading>
           </Box>
           <HStack spacing={8} alignItems={"center"}>
             <HStack

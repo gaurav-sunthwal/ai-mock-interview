@@ -34,6 +34,7 @@ type InterviewData = {
 
 export default function Page({ params }: { params: { interviewId: string } }) {
   const [interviewData, setInterviewData] = useState<InterviewData | null>(null);
+  
   const [interviewQuestion, setInterviewQuestion] = useState<{ question: string; answer: string }[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
 
