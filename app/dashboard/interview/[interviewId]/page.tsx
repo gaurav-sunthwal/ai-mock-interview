@@ -18,7 +18,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/utlis/db";
 import Webcam from "react-webcam";
 import { LuWebcam } from "react-icons/lu";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation"; // Use useParams
 
 // Define the type for interview data
 type InterviewData = {
@@ -32,42 +32,44 @@ type InterviewData = {
   mockId: string;
 };
 
-export default function Page({ params }: { params: { interviewId: string } }) {
-  const [interviewData, setInterviewData] = useState<InterviewData | null>(
-    null
-  );
+export default function Page() {
+  const { interviewId } = useParams(); // Destructure interviewId from useParams
+  const [interviewData, setInterviewData] = useState<InterviewData | null>(null);
   const [webCamEable, setWebCamEable] = useState(false);
   const router = useRouter();
   const textColor = useColorModeValue("teal.600", "teal.300");
-  // const cardBgColor = useColorModeValue("white", "gray.700");
   const btnBgColor = useColorModeValue("teal.600", "teal.400");
 
   useEffect(() => {
     const GetInterviewDetails = async () => {
       try {
-        const result = await db
-          .select()
-          .from(MockInterview)
-          .where(eq(MockInterview.mockId, params.interviewId));
+        if (interviewId && typeof interviewId === 'string') {
+          const result = await db
+            .select()
+            .from(MockInterview)
+            .where(eq(MockInterview.mockId, interviewId));
 
-        if (result && result.length > 0) {
-          setInterviewData(result[0]);
-          console.log(result[0]);
+          if (result && result.length > 0) {
+            setInterviewData(result[0]);
+            console.log(result[0]);
+          } else {
+            console.error("No interview data found for this ID");
+          }
         } else {
-          console.error("No interview data found for this ID");
+          console.log("Interview ID is undefined");
         }
       } catch (error) {
         console.error("Error fetching interview details:", error);
       }
     };
 
-    if (params.interviewId) {
+    if (interviewId) {
       GetInterviewDetails();
-      console.log(`Interview ID: ${params.interviewId}`);
+      console.log(`Interview ID: ${interviewId}`);
     } else {
       console.log("Interview ID is undefined");
     }
-  }, [params.interviewId]);
+  }, [interviewId]);
 
   return (
     <div>

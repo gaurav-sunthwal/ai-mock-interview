@@ -20,28 +20,15 @@ import { LuWebcam } from "react-icons/lu";
 import { useRouter } from "next/navigation";
 import Header from "@/app/dashboard/_components/Header";
 
-// Define the type for interview data
-type InterviewData = {
-  id: number;
-  jsonMockResp: string;
-  jobPosition: string;
-  jobDesc: string;
-  jobExperience: string;
-  createdBy: string;
-  createdAt: string | null;
-  mockId: string;
-};
-
-// Remove the constraint on PageProps
-export default function Page({ params }: { params: { interviewId: string } }) {
-  const [interviewData, setInterviewData] = useState<InterviewData | null>(null);
-  const [webCamEable, setWebCamEable] = useState(false);
+export default function Page({ params }) {
+  const [interviewData, setInterviewData] = useState(null);
+  const [webCamEnabled, setWebCamEnabled] = useState(false);
   const router = useRouter();
   const textColor = useColorModeValue("teal.600", "teal.300");
   const btnBgColor = useColorModeValue("teal.600", "teal.400");
 
   useEffect(() => {
-    const GetInterviewDetails = async () => {
+    const getInterviewDetails = async () => {
       try {
         const result = await db
           .select()
@@ -60,7 +47,7 @@ export default function Page({ params }: { params: { interviewId: string } }) {
     };
 
     if (params.interviewId) {
-      GetInterviewDetails();
+      getInterviewDetails();
       console.log(`Interview ID: ${params.interviewId}`);
     } else {
       console.log("Interview ID is undefined");
@@ -77,7 +64,7 @@ export default function Page({ params }: { params: { interviewId: string } }) {
 
         <HStack justifyContent={"center"} w={"100%"} spacing={10}>
           <Box p={8} maxW={"50%"} borderRadius="lg">
-            {webCamEable ? (
+            {webCamEnabled ? (
               <Webcam
                 style={{
                   width: "500px",
@@ -85,12 +72,11 @@ export default function Page({ params }: { params: { interviewId: string } }) {
                   borderRadius: "10px",
                   border: `4px solid ${textColor}`,
                 }}
-                onUserMedia={() => setWebCamEable(true)}
-                onUserMediaError={() => setWebCamEable(false)}
+                onUserMedia={() => setWebCamEnabled(true)}
               />
             ) : (
               <Card
-                onClick={() => setWebCamEable(true)}
+                onClick={() => setWebCamEnabled(true)}
                 w={"500px"}
                 h={"300px"}
                 alignItems={"center"}
@@ -112,7 +98,6 @@ export default function Page({ params }: { params: { interviewId: string } }) {
             )}
           </Box>
 
-          {/* Display interview details */}
           <Box maxW={"50%"} borderRadius="lg" p={4}>
             {interviewData ? (
               <>
@@ -161,7 +146,6 @@ export default function Page({ params }: { params: { interviewId: string } }) {
           </Box>
         </HStack>
 
-        {/* Start Interview Button */}
         <Button
           mt={8}
           colorScheme="teal"
@@ -170,7 +154,13 @@ export default function Page({ params }: { params: { interviewId: string } }) {
           boxShadow="xl"
           borderRadius="full"
           _hover={{ bg: "teal.500" }}
-          onClick={() => router.push(`${interviewData?.mockId}/start`)}
+          onClick={() => {
+            if (interviewData?.mockId) {
+              router.push(`${interviewData.mockId}/start`);
+            } else {
+              console.error("Mock ID is undefined");
+            }
+          }}
         >
           Start Interview
         </Button>
