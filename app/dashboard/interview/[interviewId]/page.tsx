@@ -174,7 +174,7 @@ export default function Page() {
           boxShadow="xl"
           borderRadius="full"
           _hover={{ bg: "teal.500" }}
-          onClick={() => router.push(`${interviewData?.mockId}/start`)}
+          onClick={() => router.push(`/dashboard/interview/${interviewId}/start`)}
         >
           Start Interview
         </Button>
