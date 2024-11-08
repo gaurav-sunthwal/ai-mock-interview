@@ -4,7 +4,7 @@ export default function Question({question , answer}:{question:string , answer:s
   return (
     <div>
       <h1>{question}</h1>
-      {/* <h1>: {answer}</h1> */}
+      <h2>{answer}</h2> {/* Displaying the answer */}
     </div>
   )
 }
