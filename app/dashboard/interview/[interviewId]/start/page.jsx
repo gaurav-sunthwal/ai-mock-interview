@@ -29,6 +29,7 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import { LuWebcam } from "react-icons/lu";
@@ -64,7 +65,7 @@ export default function InterviewPage() {
     isRecording,
     interimResult,
   } = useSpeechToText({ continuous: true });
-
+  const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
   useEffect(() => {
     const fetchInterviewDetails = async () => {
       try {
@@ -252,12 +253,12 @@ export default function InterviewPage() {
         {interviewData && (
           <Text fontSize="lg">Job Position: {interviewData.jobPosition}</Text>
         )}
-        <HStack justifyContent="space-between" w="100%" spacing={4} mt={8}>
+        <HStack justifyContent="space-between" w="100%" wrap={isLargerThan800? "nowrap" : "wrap"} spacing={4} mt={8}>
           {/* Webcam and Controls */}
           {/* Left Section */}
           <VStack
-            w="50%"
-            h="70vh"
+            w=  {isLargerThan800 ? "50%" : "100%"}
+            h={isLargerThan800 ? "70vh" : "auto"}
             p={4}
             borderRadius="lg"
             boxShadow="lg"
@@ -275,7 +276,7 @@ export default function InterviewPage() {
             ) : (
               <Card
                 onClick={() => setWebCamEnabled(true)}
-                w="500px"
+                w={isLargerThan800 ? "100%" : "300px"}
                 h="300px"
                 alignItems="center"
                 justifyContent="center"
@@ -316,8 +317,8 @@ export default function InterviewPage() {
 
           {/* Questions and Answers */}
           <Box
-            w="50%"
-            h="70vh"
+             w=  {isLargerThan800 ? "50%" : "100%"}
+             h={isLargerThan800 ? "70vh" : "auto"}
             p={4}
             borderRadius="lg"
             boxShadow="lg"

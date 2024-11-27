@@ -12,6 +12,7 @@ import {
   VStack,
   Button,
   useColorModeValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { MockInterview } from "@/utlis/schema";
 import { eq } from "drizzle-orm";
@@ -34,7 +35,9 @@ type InterviewData = {
 
 export default function Page() {
   const { interviewId } = useParams(); // Destructure interviewId from useParams
-  const [interviewData, setInterviewData] = useState<InterviewData | null>(null);
+  const [interviewData, setInterviewData] = useState<InterviewData | null>(
+    null
+  );
   const [webCamEable, setWebCamEable] = useState(false);
   const router = useRouter();
   const textColor = useColorModeValue("teal.600", "teal.300");
@@ -43,7 +46,7 @@ export default function Page() {
   useEffect(() => {
     const GetInterviewDetails = async () => {
       try {
-        if (interviewId && typeof interviewId === 'string') {
+        if (interviewId && typeof interviewId === "string") {
           const result = await db
             .select()
             .from(MockInterview)
@@ -70,7 +73,7 @@ export default function Page() {
       console.log("Interview ID is undefined");
     }
   }, [interviewId]);
-
+  const [isLargerThan800] = useMediaQuery("(min-width: 800px)");
   return (
     <div>
       <Header />
@@ -79,8 +82,8 @@ export default function Page() {
           {`Let's Get Started with Your Mock Interview!`}
         </Heading>
 
-        <HStack justifyContent={"center"} w={"100%"} spacing={10}>
-          <Box p={8} maxW={"50%"} borderRadius="lg">
+        <HStack wrap={"wrap"} justifyContent={"center"} w={"100%"} spacing={10}>
+          <Box p={8} maxW={isLargerThan800 ? "50%" : "100%"} borderRadius="lg">
             {webCamEable ? (
               <Webcam
                 style={{
@@ -95,7 +98,7 @@ export default function Page() {
             ) : (
               <Card
                 onClick={() => setWebCamEable(true)}
-                w={"500px"}
+                w={isLargerThan800 ? "500px" : "300px"}
                 h={"300px"}
                 alignItems={"center"}
                 justifyContent="center"
@@ -117,7 +120,7 @@ export default function Page() {
           </Box>
 
           {/* Display interview details */}
-          <Box maxW={"50%"} borderRadius="lg" p={4}>
+          <Box maxW={isLargerThan800 ? "50%" : "100%"} borderRadius="lg" p={4}>
             {interviewData ? (
               <>
                 <Card p={5} boxShadow={"2xl"} mb={5} borderRadius="md">
@@ -148,7 +151,11 @@ export default function Page() {
                     <strong>Instructions:</strong>{" "}
                     {`Enable your webcam and
                     microphone to begin your AI-generated mock interview. You
-                    will be asked 5 questions, which you can answer, and at the
+                    will be asked ${
+                      interviewData.jsonMockResp
+                        ? JSON.parse(interviewData.jsonMockResp).length
+                        : 0
+                    } questions, which you can answer, and at the
                     end, you'll receive feedback based on your responses.`}
                     <br />
                     <br />
@@ -174,7 +181,9 @@ export default function Page() {
           boxShadow="xl"
           borderRadius="full"
           _hover={{ bg: "teal.500" }}
-          onClick={() => router.push(`/dashboard/interview/${interviewId}/start`)}
+          onClick={() =>
+            router.push(`/dashboard/interview/${interviewId}/start`)
+          }
         >
           Start Interview
         </Button>
