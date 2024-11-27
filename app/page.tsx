@@ -49,7 +49,7 @@ export default function Home() {
             w={"100%"}
           >
             <Heading textAlign={"center"} fontSize="40px">
-              Mock
+            MockMate
             </Heading>
           </Box>
           <Box display="flex" gap="4">

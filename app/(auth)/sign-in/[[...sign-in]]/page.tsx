@@ -12,7 +12,7 @@ export default function Page() {
     - @tailwindcss/forms
 */}
 
-      <section >
+      <section>
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
             <Image
@@ -38,12 +38,13 @@ export default function Page() {
               </a>
 
               <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                Welcome to Squid 🦑
+                Welcome to MockMate 🦑
               </h2>
 
               <p className="mt-4 leading-relaxed text-white/90">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+                Ace your interviews with our AI-powered mock interview platform.
+                Practice with realistic scenarios and get personalized feedback
+                to boost your confidence and land your dream job.
               </p>
             </div>
           </section>
@@ -80,7 +81,7 @@ export default function Page() {
               </div>
 
               <Box>
-                <SignIn/>
+                <SignIn />
               </Box>
             </div>
           </main>
