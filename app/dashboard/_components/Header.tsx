@@ -62,12 +62,14 @@ export default function Header() {
           />
 
           <Box>
-            <Heading
-              fontFamily="Playwrite GB S"
-              style={{ fontWeight: "bold", fontSize: "24px" }}
-            >
-              MockMate
-            </Heading>
+            <Link href="/" textDecoration={"none"}>
+              <Heading
+                fontFamily="Playwrite GB S"
+                style={{ fontWeight: "bold", fontSize: "24px" }}
+              >
+                MockMate
+              </Heading>
+            </Link>
           </Box>
           <HStack spacing={8} alignItems={"center"}>
             <HStack

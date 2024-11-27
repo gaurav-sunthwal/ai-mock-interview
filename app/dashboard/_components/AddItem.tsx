@@ -50,7 +50,7 @@ export default function AddItem() {
 
     console.log(jobDescription, jobRole, yearsOfExperience, additionalInfo);
 
-    const InputPrompt = `Based on the following information, generate five tailored interview questions and answers in JSON format. Include only "question" and "answer" fields without additional notes.
+    const InputPrompt = `Based on the following information, generate 7 tailored interview questions and answers in JSON format. Include only "question" and "answer" fields without additional notes.
 
 Details:
 - Job Position: ${jobRole}
