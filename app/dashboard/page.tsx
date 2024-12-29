@@ -15,13 +15,10 @@ import {
   Divider,
   CardHeader,
   CardFooter,
+  CardBody,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import {
-  MdDelete,
-  MdFeedback,
-  MdPlayArrow,
-} from "react-icons/md"; // Icons
+import { MdDelete, MdFeedback, MdPlayArrow } from "react-icons/md"; // Icons
 import Header from "./_components/Header";
 import AddItem from "./_components/AddItem";
 import { MockInterview, UserAnswer } from "@/utlis/schema";
@@ -96,13 +93,11 @@ const DashboardPage = () => {
     fetchInterviewDetails();
   }, [userId]);
 
-  
   const btnColor = useColorModeValue("blue.600", "blue.400");
 
   // Format creation date
- 
+
   // Toggles the read more/less state for a specific card
- 
 
   // Delete Interview and User Answer function
   const handleDelete = async (mockId: string) => {
@@ -125,6 +120,51 @@ const DashboardPage = () => {
   return (
     <div>
       <Header />
+      <div>
+        <Heading
+          mb={4}
+          size="xl"
+          fontWeight="bold"
+          color={btnColor}
+          textAlign="center"
+        >
+          Already For You Interview
+        </Heading>
+        <Wrap spacing="30px" justify="center" w="100%">
+          {/* Software Interview Card */}
+          <Box p={3}>
+            <WrapItem w={{ base: "100%", sm: "45%", md: "30%" }}>
+              <Card w="100%" boxShadow="md">
+                <CardHeader bg={useColorModeValue("blue.100", "blue.700")}>
+                  <HStack justifyContent="space-between">
+                    <Heading fontSize="20px">Software Interview</Heading>
+                    <Text fontSize="sm">Available Now</Text>
+                  </HStack>
+                </CardHeader>
+                <Divider />
+                <CardBody>
+                  <Text fontSize="sm" color="gray.600">
+                    Explore the world of software engineering interviews and
+                    sharpen your skills with real-world mock interviews.
+                  </Text>
+                </CardBody>
+                <CardFooter justifyContent="center">
+                  <Link href="/dashboard/MockInterview/Software-Interview">
+                    <IconButton
+                      icon={<MdPlayArrow />}
+                      aria-label="Start Interview"
+                      colorScheme="blue"
+                      size="md"
+                    />
+                  </Link>
+                </CardFooter>
+              </Card>
+            </WrapItem>
+          </Box>
+        </Wrap>
+      </div>
+
+      <Divider />
       <Box
         w="100%"
         p={{ base: 4, md: 8 }}

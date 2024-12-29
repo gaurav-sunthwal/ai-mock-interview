@@ -31,7 +31,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 export default function AddItem() {
-  const router =  useRouter();
+  const router = useRouter();
   const [jobRole, setJobRole] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [yearsOfExperience, setYearsOfExperience] = useState("");
@@ -82,12 +82,12 @@ Please ensure that the questions are relevant to the job role, experience level,
         .returning({ mockId: MockInterview.mockId });
 
       console.log("Inserted Id ", resp);
-      if(resp){
-        setIsDialogOpen(false)
-        router.push(`dashboard/interview/${resp[0]?.mockId}`)
+      if (resp) {
+        setIsDialogOpen(false);
+        router.push(`dashboard/interview/${resp[0]?.mockId}`);
       }
     } else {
-      console.log("error to get respo")
+      console.log("error to get respo");
     }
     setIsLoading(false);
     setBtnText("Start Interview");

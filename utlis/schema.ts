@@ -12,6 +12,15 @@ export const MockInterview = pgTable("mockInterview", {
   createdAt: varchar("createdAt"),
   mockId: varchar("mockId").notNull(),
 });
+export const AddedMockInterview = pgTable("AddedMockInterview", {
+  id: serial("id").primaryKey(),
+  UserAnswer: text("UserAnswer").notNull(),
+  jobPosition: varchar("jobPosition").notNull(),
+  jobDesc: varchar("jobDesc").notNull(),
+  createdBy: varchar("createdBy").notNull(),
+  createdAt: varchar("createdAt"),
+  mockId: varchar("mockId").notNull(),
+});
 
 export const UserAnswer = pgTable('userAnswer', {
   id: serial('id').primaryKey(),
@@ -26,4 +35,5 @@ export const UserAnswer = pgTable('userAnswer', {
 });
 // Infer the TypeScript type for MockInterview based on the pgTable structure
 export type MockInterview = InferModel<typeof MockInterview>;
+export type AddedMockInterview  = InferModel<typeof AddedMockInterview>;
 export type UserAnswer = InferModel<typeof UserAnswer>; // Correct type inference

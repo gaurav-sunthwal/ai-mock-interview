@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI , GoogleAIFileManager } from "@google/generative-ai";
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -6,7 +6,6 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
 });
-
 const generationConfig = {
   temperature: 1,
   topP: 0.95,
@@ -18,4 +17,3 @@ const generationConfig = {
 export const chatSession = model.startChat({
   generationConfig,
 });
-
