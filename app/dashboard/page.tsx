@@ -16,6 +16,7 @@ import {
   CardHeader,
   CardFooter,
   CardBody,
+  Badge,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { MdDelete, MdFeedback, MdPlayArrow } from "react-icons/md"; // Icons
@@ -94,7 +95,8 @@ const DashboardPage = () => {
   }, [userId]);
 
   const btnColor = useColorModeValue("blue.600", "blue.400");
-
+  const cardBg = useColorModeValue("white", "gray.700")
+  const headerBg = useColorModeValue("blue.50", "blue.900")
   // Format creation date
 
   // Toggles the read more/less state for a specific card
@@ -120,49 +122,49 @@ const DashboardPage = () => {
   return (
     <div>
       <Header />
-      <div>
+      <Box mb={5}>
         <Heading
-          mb={4}
-          size="xl"
-          fontWeight="bold"
+          mb={6}
+          size="2xl"
+          fontWeight="extrabold"
           color={btnColor}
           textAlign="center"
         >
-          Already For You Interview
+          Ready-Made Interviews
         </Heading>
         <Wrap spacing="30px" justify="center" w="100%">
-          {/* Software Interview Card */}
-          <Box p={3}>
-            <WrapItem w={{ base: "100%", sm: "45%", md: "30%" }}>
-              <Card w="100%" boxShadow="md">
-                <CardHeader bg={useColorModeValue("blue.100", "blue.700")}>
-                  <HStack justifyContent="space-between">
-                    <Heading fontSize="20px">Software Interview</Heading>
-                    <Text fontSize="sm">Available Now</Text>
-                  </HStack>
-                </CardHeader>
-                <Divider />
-                <CardBody>
-                  <Text fontSize="sm" color="gray.600">
-                    Explore the world of software engineering interviews and
-                    sharpen your skills with real-world mock interviews.
-                  </Text>
-                </CardBody>
-                <CardFooter justifyContent="center">
-                  <Link href="/dashboard/MockInterview/Software-Interview">
-                    <IconButton
-                      icon={<MdPlayArrow />}
-                      aria-label="Start Interview"
-                      colorScheme="blue"
-                      size="md"
-                    />
-                  </Link>
-                </CardFooter>
-              </Card>
-            </WrapItem>
-          </Box>
+          <WrapItem w={{ base: "100%", sm: "45%", md: "30%" }}>
+            <Card w="100%" boxShadow="lg" bg={cardBg}>
+              <CardHeader bg={headerBg} py={6}>
+                <HStack justifyContent="space-between">
+                  <Heading fontSize="xl">Software Interview</Heading>
+                  <Badge colorScheme="green">Available Now</Badge>
+                </HStack>
+              </CardHeader>
+              <CardBody>
+                <Text
+                  fontSize="md"
+                  color={useColorModeValue("gray.600", "gray.200")}
+                >
+                  Explore the world of software engineering interviews and
+                  sharpen your skills with real-world mock interviews.
+                </Text>
+              </CardBody>
+              <CardFooter justifyContent="center">
+                <Link href="/dashboard/MockInterview/Software-Interview">
+                  <IconButton
+                    icon={<MdPlayArrow />}
+                    aria-label="Start Interview"
+                    colorScheme="blue"
+                    size="lg"
+                    rounded="full"
+                  />
+                </Link>
+              </CardFooter>
+            </Card>
+          </WrapItem>
         </Wrap>
-      </div>
+      </Box>
 
       <Divider />
       <Box
