@@ -12,7 +12,7 @@ import {
   Card,
 } from "@chakra-ui/react";
 import React, { useEffect, useState, useRef } from "react";
-import { MdCallEnd, MdMic, MdPhotoCamera } from "react-icons/md";
+import { MdCallEnd, MdMic, MdMicOff, MdPhotoCamera } from "react-icons/md";
 import { FiCameraOff } from "react-icons/fi";
 
 import SpeechRecognition, {
@@ -248,11 +248,11 @@ Let's make this interview **enjoyable, insightful, and productive**!
           <IconButton
             fontSize={"2xl"}
             aria-label="mic"
-            icon={<MdMic />}
+            icon={isListening ? <MdMic/> : <MdMicOff/>}
             onClick={handleMicClick}
             colorScheme={isListening ? "red" : "blue"}
             isLoading={isLoading}
-            isDisabled={!isListening}
+            // isDisabled={!isListening}
           />
           <IconButton
             aria-label="webcam"
