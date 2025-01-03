@@ -25,10 +25,10 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 import { chatSession } from "@/utlis/GaminiAI";
-import { db } from "@/utlis/db";
 import { MockInterview } from "@/utlis/schema";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { db } from "@/utlis/db";
 
 export default function AddItem() {
   const router = useRouter();

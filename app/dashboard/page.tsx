@@ -132,7 +132,7 @@ const DashboardPage = () => {
         >
           Ready-Made Interviews
         </Heading>
-        <Wrap spacing="30px" justify="center" w="100%">
+        <Wrap spacing="30px" justify="center" w="100%" p={2}>
           <WrapItem w={{ base: "100%", sm: "45%", md: "30%" }}>
             <Card w="100%" boxShadow="lg" bg={cardBg}>
               <CardHeader bg={headerBg} py={6}>
